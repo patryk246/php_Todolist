@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% if app.user %}
+	<h2 class="page-header">Latest Items</h2>
+	<table class="table table-striped"> 
+	<thead> 
+	<tr> 
+	<th class="active">ID</th> 
+	<th class="success">Product</th> 
+	<th class="warning">Number</th>
+	<th></th> 
+	</tr> 
+	</thead> 
+	<tbody> 
+	{% for item in items %}
+	<tr> 
+	<th scope="row">{{loop.index}}</th> 
+	<td>{{item.name}}</td> 
+	<td>{{item.number}}</td> 
+	<td>
+	<a href="/todo/details/{{item.id}}" class="btn btn-default">View</a>
+	<a href="/todo/edit/{{item.id}}" class="btn btn-default">Edit</a>
+	<a href="/todo/delete/{{item.id}}" class="btn btn-default">Delete</a>
+	</td>
+	</tr> 
+	{% endfor %}
+	</tbody> 
+	</table>
+	{% else %}
+		<p><a href="{{path('fos_user_security_login')}}">Zaloguj się</a> lub <a href="{{path('fos_user_registration_register')}}">Zarejestruj się</a> aby korzystać z pełnej funkcjonalności</p>
+	{% endif %}
+{% endblock %}

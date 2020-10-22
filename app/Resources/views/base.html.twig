@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-default">
+      <a class="navbar-brand" href="/">Shopping List</a>
+      
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a href="/">Home </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/todo/create">Add Item</a>
+          </li>
+            
+          
+        </ul>
+        <div class="pull-right">
+            {% if app.user %}
+              <p>Zalogowany jako {{app.user}} 
+                {% if is_granted('ROLE_ADMIN') %} 
+                |<a href={{path('admin')}}>Panel administracyjny</a>
+                 {% endif %} 
+              |<a href={{path('fos_user_security_logout')}}>Wyloguj się</a></p>
+            {% endif %}
+            </div>  
+        </div>
+    
+    </nav>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                {% for flash_message in app.session.flashbag.get('notice') %}
+                <div class="alert alert-success">{{flash_message}}</div>
+                {% endfor %}
+
+                {% for flash_message in app.session.flashbag.get('error') %}
+                <div class="alert alert-danger">{{flash_message}}</div>
+                {% endfor %}
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+
+    </div><!-- /.container -->
+{% block javascripts %}{% endblock %}
+  </body>
+</html>
+

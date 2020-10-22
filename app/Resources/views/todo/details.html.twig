@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<a class="btn btn-default" href="/"> Back To Items</a>
+	<hr>
+	<h2 class="page-header">{{item.name}}</h2>
+	<ul class="list-group">
+		<li class="list-group-item">Category: {{item.category}}</li>
+		<li class="list-group-item">Number: {{item.number}}</li>
+		<li class="list-group-item">Priority: {{item.priority}}</li>
+		<li class="list-group-item">Due: {{item.dueDate|date('F j, Y, g:i a')}}</li>
+	</ul>
+{% endblock %}
